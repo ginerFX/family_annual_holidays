@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#B3280F">
+<meta name="color-scheme" content="only light">
+<meta name="description" content="Cost per family for the August 2027 holiday: confirmed prices and estimates for each option.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Holiday cost comparison, August 2027">
+<meta property="og:description" content="Cost per family for each holiday option, 1 to 14 August 2027.">
+<meta property="og:type" content="website">
+<title>Holiday cost comparison, August 2027</title>
+<style>
+  :root {
+    --bg: #FFFFFF; --surface: #FFFFFF; --soft: #F7F2F0;
+    --ink: #222222; --muted: #5E5A58; --line: #E6DFDC;
+    --red: #B3280F; --red-band: #B3280F; --red-tint: #F9E7E2;
+    --amber: #E3A12F; --amber-bg: #FFF3D6; --amber-ink: #7A4E00;
+    --good: #2E7D32; --bad: #B3280F;
+    --sans: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.5; overflow-x: hidden; }
+  .r { color: var(--red); }
+
+  /* cover, modelled on the red-band business proposal look */
+  .cover { display: flex; align-items: stretch; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .band {
+    flex: 0 0 clamp(26px, 9vw, 150px);
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0 14px, rgba(255,255,255,0) 14px 28px),
+      var(--red-band);
+  }
+  .titles { padding: clamp(22px, 5vw, 56px) clamp(16px, 4vw, 48px); min-width: 0; }
+  .kicker, .sub { margin: 0; text-transform: uppercase; letter-spacing: .22em; font-size: clamp(.68rem, 2.4vw, .9rem); font-weight: 600; }
+  .kicker { color: var(--ink); }
+  .sub { color: var(--red); }
+  h1 { margin: 10px 0 12px; font-weight: 800; text-transform: uppercase; line-height: 1.02; letter-spacing: -.005em; font-size: clamp(2.1rem, 10vw, 4.2rem); }
+  h1 span { display: block; }
+  h1 .r { color: var(--red); }
+
+  .page { max-width: 1120px; margin: 0 auto; padding: 22px 16px 56px; }
+  .lede { margin: 0 0 18px; color: var(--muted); max-width: 70ch; font-size: .98rem; }
+
+  h2 { margin: 0 0 6px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 1.15rem; line-height: 1.2; }
+  h3 { margin: 0; font-weight: 700; font-size: 1.1rem; line-height: 1.25; color: #fff; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 16px; padding: 10px 14px; background: var(--soft); border-radius: 8px; color: var(--muted); font-size: .88rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .sw { display: inline-block; width: 24px; height: 12px; border-radius: 2px; }
+  .sw.c { background: var(--red); }
+  .sw.e { background: repeating-linear-gradient(45deg, var(--amber) 0 3px, transparent 3px 7px); border: 1px dashed var(--amber); }
+  .sw.b { width: 3px; height: 18px; background: var(--ink); border-radius: 0; }
+
+  .cards { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; min-width: 0; display: flex; flex-direction: column; }
+  .chead { background: var(--red-band); padding: 14px 16px 12px; }
+  .meta { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 2px 14px; color: rgba(255,255,255,.88); font-size: .74rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+  .cbody { padding: 12px 14px 6px; flex: 1; }
+  .desc { margin: 0 0 8px; color: var(--muted); font-size: .9rem; }
+
+  table.costs { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .costs th, .costs td { padding: 8px 4px; border-top: 1px solid var(--line); vertical-align: top; text-align: left; font-size: .92rem; }
+  .costs thead th { border-top: 0; border-bottom: 2px solid var(--ink); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink); font-weight: 700; vertical-align: bottom; }
+  .costs thead th small { display: block; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--muted); font-size: .72rem; }
+  .costs tbody th { font-weight: 500; color: var(--muted); width: 34%; padding-right: 6px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  .chip { display: inline-block; padding: 3px 8px 2px; border-radius: 4px; border: 1px solid var(--red); background: var(--red-tint); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; line-height: 1.25; }
+  .chip small { display: block; font-weight: 600; font-size: .66rem; text-transform: uppercase; letter-spacing: .05em; color: var(--red); }
+  .chip.s-estimate { border: 1px dashed var(--amber); background: var(--amber-bg); }
+  .chip.s-estimate small { color: var(--amber-ink); }
+  .na { color: var(--muted); font-size: .86rem; }
+
+  .costs tr.tot th, .costs tr.tot td { border-top: 2px solid var(--ink); padding-top: 12px; }
+  .costs tr.tot th { color: var(--ink); font-weight: 800; text-transform: uppercase; font-size: .78rem; letter-spacing: .05em; }
+  .costs tr.tot strong { display: block; font-size: 1.45rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .diff { display: block; font-size: .76rem; font-weight: 700; margin-top: 2px; }
+  .diff.under { color: var(--good); }
+  .diff.over { color: var(--bad); }
+
+  .bar { position: relative; height: 12px; margin: 9px 6px 4px 0; display: flex; background: var(--soft); border-radius: 2px; }
+  .bar .c { background: var(--red); height: 100%; border-radius: 2px 0 0 2px; }
+  .bar .e { height: 100%; background: repeating-linear-gradient(45deg, var(--amber) 0 3px, transparent 3px 7px); border: 1px dashed var(--amber); border-left: 0; }
+  .bar .mark { position: absolute; top: -4px; bottom: -4px; width: 3px; background: var(--ink); transform: translateX(-1px); }
+
+  .how { margin: 12px 0 8px; color: var(--muted); font-size: .8rem; }
+  .cfoot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 11px 16px; background: var(--soft); border-top: 1px solid var(--line); font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .cfoot strong { font-size: 1.1rem; color: var(--ink); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+
+  .ref { margin-top: 32px; padding-top: 20px; border-top: 3px solid var(--red); }
+  .refsub { margin: 0 0 14px; color: var(--muted); font-size: .9rem; }
+  .fgrid { display: grid; gap: 14px 22px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .fgrid div { border-left: 4px solid var(--red); padding-left: 12px; }
+  .fgrid strong { display: block; font-size: 1.02rem; }
+  .fgrid span { display: block; color: var(--muted); font-size: .86rem; margin-top: 2px; }
+  .fnote { margin: 16px 0 0; color: var(--muted); font-size: .84rem; max-width: 100ch; }
+
+  .notes { margin-top: 30px; display: grid; gap: 22px 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .notes ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .9rem; }
+  .notes li + li { margin-top: 6px; }
+
+  @media (max-width: 560px) {
+    body { font-size: 15px; }
+    .page { padding: 18px 12px 48px; }
+    .cbody { padding: 10px 12px 4px; }
+    .chead { padding: 12px 12px 10px; }
+    .costs th, .costs td { padding: 8px 2px; }
+    .costs tbody th { width: 33%; font-size: .85rem; }
+    .costs tr.tot strong { font-size: 1.3rem; }
+  }
+
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="band" aria-hidden="true"></div>
+  <div class="titles">
+    <p class="kicker">Three families, August 2027</p>
+    <h1><span class="r">Holiday</span><span>Cost comparison</span></h1>
+    <p class="sub">Per family, 1 to 14 August</p>
+  </div>
+</header>
+
+<main class="page">
+  <p class="lede">The window is 1 to 14 August, when all three families are free. Madrid families rent a car in the Germany and Poland options. In the Spain road trips (Salou and Cádiz) the Madrid families use their own cars and the Berlin family rents one. In Mallorca no car is included, only airport transfers inside the extras. The budget marker is €4,000 per family, the top of your range.</p>
+
+  <div class="legend" aria-label="Legend">
+    <span><i class="sw c"></i> Confirmed price</span>
+    <span><i class="sw e"></i> Estimate</span>
+    <span><i class="sw b"></i> Budget, €4,000</span>
+  </div>
+
+  <div class="cards">
+<article class="card"><header class="chead"><h3>Berlin house: Mondschein apartment</h3><p class="meta"><span>13 nights</span><span>Germany, rental car needed</span></p></header><div class="cbody"><p class="desc">4 bedrooms and 4 bathrooms near Berliner See. Cost split between the two Madrid families.</p><table class="costs"><thead><tr><th scope="col"><span class="sr">Item</span></th><th scope="col">Madrid family<small>each of the two</small></th><th scope="col">Berlin family</th></tr></thead><tbody><tr><th scope="row">Accommodation</th><td><span class="chip s-prorated">€1,880<small>pro-rated</small></span></td><td><span class="na">At home</span></td></tr><tr><th scope="row">Flights (4 seats)</th><td><span class="chip s-confirmed">€776<small>confirmed</small></span></td><td><span class="na">—</span></td></tr><tr><th scope="row">Car rental</th><td><span class="chip s-estimate">€700<small>estimate</small></span></td><td><span class="na">Own car</span></td></tr><tr><th scope="row">Fuel and tolls</th><td><span class="na">—</span></td><td><span class="chip s-estimate">€100<small>estimate</small></span></td></tr><tr><th scope="row">Food and activities</th><td><span class="chip s-estimate">€1,125<small>estimate</small></span></td><td><span class="chip s-estimate">€450<small>estimate</small></span></td></tr><tr class="tot"><th scope="row">Total per family</th><td><strong>€4,481</strong><span class="diff over">€481 over</span><div class="bar" role="img" aria-label="Confirmed €2,656, estimated €1,825"><span class="c" style="width:27.96%"></span><span class="e" style="width:19.21%"></span><i class="mark" style="left:42.11%"></i></div></td><td><strong>€550</strong><span class="diff under">€3,450 under</span><div class="bar" role="img" aria-label="Confirmed €0, estimated €550"><span class="c" style="width:0.00%"></span><span class="e" style="width:5.79%"></span><i class="mark" style="left:42.11%"></i></div></td></tr></tbody></table><p class="how">Quote on screen: €8,162 for 30 nights (1 to 31 Aug, 7 guests, taxes included). Without the monthly discount it was €8,667, about €289 per night. The 13-night figure uses that rate, split in two.</p></div><footer class="cfoot"><span>All three families together</span><strong>€9,512</strong></footer></article>
+<article class="card"><header class="chead"><h3>Berlin house: 2-bedroom lake house</h3><p class="meta"><span>13 nights</span><span>Germany, rental car needed</span></p></header><div class="cbody"><p class="desc">2 bedrooms, 1 bathroom, 7 guests, near Müggelsee. Cost split between the two Madrid families.</p><table class="costs"><thead><tr><th scope="col"><span class="sr">Item</span></th><th scope="col">Madrid family<small>each of the two</small></th><th scope="col">Berlin family</th></tr></thead><tbody><tr><th scope="row">Accommodation</th><td><span class="chip s-prorated">€1,953<small>pro-rated</small></span></td><td><span class="na">At home</span></td></tr><tr><th scope="row">Flights (4 seats)</th><td><span class="chip s-confirmed">€776<small>confirmed</small></span></td><td><span class="na">—</span></td></tr><tr><th scope="row">Car rental</th><td><span class="chip s-estimate">€700<small>estimate</small></span></td><td><span class="na">Own car</span></td></tr><tr><th scope="row">Fuel and tolls</th><td><span class="na">—</span></td><td><span class="chip s-estimate">€100<small>estimate</small></span></td></tr><tr><th scope="row">Food and activities</th><td><span class="chip s-estimate">€1,125<small>estimate</small></span></td><td><span class="chip s-estimate">€450<small>estimate</small></span></td></tr><tr class="tot"><th scope="row">Total per family</th><td><strong>€4,554</strong><span class="diff over">€554 over</span><div class="bar" role="img" aria-label="Confirmed €2,729, estimated €1,825"><span class="c" style="width:28.73%"></span><span class="e" style="width:19.21%"></span><i class="mark" style="left:42.11%"></i></div></td><td><strong>€550</strong><span class="diff under">€3,450 under</span><div class="bar" role="img" aria-label="Confirmed €0, estimated €550"><span class="c" style="width:0.00%"></span><span class="e" style="width:5.79%"></span><i class="mark" style="left:42.11%"></i></div></td></tr></tbody></table><p class="how">Quote on screen: €5,708 for 19 nights (2 to 21 Aug, 7 guests) after a weekly discount, about €300 per night. The 13-night figure uses that rate, split in two.</p></div><footer class="cfoot"><span>All three families together</span><strong>€9,658</strong></footer></article>
+<article class="card"><header class="chead"><h3>Salou with PortAventura days</h3><p class="meta"><span>7 nights</span><span>Spain, Madrid families drive, Berlin family rents a car</span></p></header><div class="cbody"><p class="desc">Half board, 2 park days. Madrid families drive about 6 hours.</p><table class="costs"><thead><tr><th scope="col"><span class="sr">Item</span></th><th scope="col">Madrid family<small>each of the two</small></th><th scope="col">Berlin family</th></tr></thead><tbody><tr><th scope="row">Accommodation</th><td><span class="chip s-estimate">€1,850<small>estimate</small></span></td><td><span class="chip s-estimate">€1,850<small>estimate</small></span></td></tr><tr><th scope="row">Flights (4 seats)</th><td><span class="na">Drive</span></td><td><span class="chip s-confirmed">€868<small>confirmed</small></span></td></tr><tr><th scope="row">Car rental</th><td><span class="na">Not needed</span></td><td><span class="chip s-estimate">€450<small>estimate</small></span></td></tr><tr><th scope="row">Fuel and tolls</th><td><span class="chip s-estimate">€275<small>estimate</small></span></td><td><span class="chip s-estimate">€275<small>estimate</small></span></td></tr><tr><th scope="row">Food and activities</th><td><span class="chip s-estimate">€850<small>estimate</small></span></td><td><span class="chip s-estimate">€850<small>estimate</small></span></td></tr><tr class="tot"><th scope="row">Total per family</th><td><strong>€2,975</strong><span class="diff under">€1,025 under</span><div class="bar" role="img" aria-label="Confirmed €0, estimated €2,975"><span class="c" style="width:0.00%"></span><span class="e" style="width:31.32%"></span><i class="mark" style="left:42.11%"></i></div></td><td><strong>€4,293</strong><span class="diff over">€293 over</span><div class="bar" role="img" aria-label="Confirmed €868, estimated €3,425"><span class="c" style="width:9.14%"></span><span class="e" style="width:36.05%"></span><i class="mark" style="left:42.11%"></i></div></td></tr></tbody></table><p class="how">Estimate: hotel with half board plus about €200 of park tickets. Check the children’s ages against the ticket brackets (under 3 is free). The Berlin family flies to Madrid, rents a car there for about 8 days (my estimate) and drives with the Madrid families.</p></div><footer class="cfoot"><span>All three families together</span><strong>€10,243</strong></footer></article>
+<article class="card"><header class="chead"><h3>Poland: Blue Mountain Resort, Szklarska Poręba</h3><p class="meta"><span>12 nights</span><span>Poland, rental car for Madrid families</span></p></header><div class="cbody"><p class="desc">Deluxe apartment, 41 m², kitchenette, half board, 2 adults and 2 children, 2 to 14 August. Aquapark, kids&#x27; club and entertainment on site.</p><table class="costs"><thead><tr><th scope="col"><span class="sr">Item</span></th><th scope="col">Madrid family<small>each of the two</small></th><th scope="col">Berlin family</th></tr></thead><tbody><tr><th scope="row">Accommodation</th><td><span class="chip s-confirmed">€2,577<small>confirmed</small></span></td><td><span class="chip s-confirmed">€2,577<small>confirmed</small></span></td></tr><tr><th scope="row">Flights (4 seats)</th><td><span class="chip s-confirmed">€776<small>confirmed</small></span></td><td><span class="na">Own car</span></td></tr><tr><th scope="row">Car rental</th><td><span class="chip s-estimate">€700<small>estimate</small></span></td><td><span class="na">Own car</span></td></tr><tr><th scope="row">Fuel and tolls</th><td><span class="chip s-estimate">€130<small>estimate</small></span></td><td><span class="chip s-estimate">€130<small>estimate</small></span></td></tr><tr><th scope="row">Food and activities</th><td><span class="chip s-estimate">€700<small>estimate</small></span></td><td><span class="chip s-estimate">€700<small>estimate</small></span></td></tr><tr class="tot"><th scope="row">Total per family</th><td><strong>€4,883</strong><span class="diff over">€883 over</span><div class="bar" role="img" aria-label="Confirmed €3,353, estimated €1,530"><span class="c" style="width:35.29%"></span><span class="e" style="width:16.11%"></span><i class="mark" style="left:42.11%"></i></div></td><td><strong>€3,407</strong><span class="diff under">€593 under</span><div class="bar" role="img" aria-label="Confirmed €2,577, estimated €830"><span class="c" style="width:27.13%"></span><span class="e" style="width:8.74%"></span><i class="mark" style="left:42.11%"></i></div></td></tr></tbody></table><p class="how">Quote on screen: €2,577.07 for 12 nights, 4 people, 1 room, half board, excluding taxes and fees, with a 30% deposit and special cancellation conditions. The final price will be a little higher. Check that this package includes aquapark access. Madrid families fly to Berlin (confirmed fare) and drive about 4 hours; Wrocław is closer, about 2 hours, so check those flights too. Fuel is my estimate for the 760 km round trip.</p></div><footer class="cfoot"><span>All three families together</span><strong>€13,173</strong></footer></article>
+<article class="card"><header class="chead"><h3>Berlin house: Baltic hotel, then Erkner house</h3><p class="meta"><span>13 nights</span><span>Germany, rental car needed</span></p></header><div class="cbody"><p class="desc">4 nights half board on Usedom, then 9 nights in a house near Erkner. The Berlin family joins the hotel.</p><table class="costs"><thead><tr><th scope="col"><span class="sr">Item</span></th><th scope="col">Madrid family<small>each of the two</small></th><th scope="col">Berlin family</th></tr></thead><tbody><tr><th scope="row">Accommodation</th><td><span class="chip s-estimate">€3,200<small>estimate</small></span></td><td><span class="chip s-estimate">€1,900<small>estimate</small></span></td></tr><tr><th scope="row">Flights (4 seats)</th><td><span class="chip s-confirmed">€776<small>confirmed</small></span></td><td><span class="na">—</span></td></tr><tr><th scope="row">Car rental</th><td><span class="chip s-estimate">€700<small>estimate</small></span></td><td><span class="na">Own car</span></td></tr><tr><th scope="row">Fuel and tolls</th><td><span class="na">—</span></td><td><span class="chip s-estimate">€100<small>estimate</small></span></td></tr><tr><th scope="row">Food and activities</th><td><span class="chip s-estimate">€1,075<small>estimate</small></span></td><td><span class="chip s-estimate">€550<small>estimate</small></span></td></tr><tr class="tot"><th scope="row">Total per family</th><td><strong>€5,751</strong><span class="diff over">€1,751 over</span><div class="bar" role="img" aria-label="Confirmed €776, estimated €4,975"><span class="c" style="width:8.17%"></span><span class="e" style="width:52.37%"></span><i class="mark" style="left:42.11%"></i></div></td><td><strong>€2,550</strong><span class="diff under">€1,450 under</span><div class="bar" role="img" aria-label="Confirmed €0, estimated €2,550"><span class="c" style="width:0.00%"></span><span class="e" style="width:26.84%"></span><i class="mark" style="left:42.11%"></i></div></td></tr></tbody></table><p class="how">Estimate: Usedom family hotel about €1,900 for 4 nights with half board (August prices are not published yet), plus 9 nights of house at about €289 per night, split in two.</p></div><footer class="cfoot"><span>All three families together</span><strong>€14,052</strong></footer></article>
+<article class="card"><header class="chead"><h3>Mallorca: Iberostar Waves Ciudad Blanca</h3><p class="meta"><span>12 nights</span><span>Spain, flights and transfers</span></p></header><div class="cbody"><p class="desc">Half board, 1 room, 4 guests, 2 to 14 August.</p><table class="costs"><thead><tr><th scope="col"><span class="sr">Item</span></th><th scope="col">Madrid family<small>each of the two</small></th><th scope="col">Berlin family</th></tr></thead><tbody><tr><th scope="row">Accommodation</th><td><span class="chip s-confirmed">€4,728<small>confirmed</small></span></td><td><span class="chip s-confirmed">€4,728<small>confirmed</small></span></td></tr><tr><th scope="row">Flights (4 seats)</th><td><span class="chip s-confirmed">€388<small>confirmed</small></span></td><td><span class="chip s-confirmed">€1,080<small>confirmed</small></span></td></tr><tr><th scope="row">Car rental</th><td><span class="na">Not needed</span></td><td><span class="na">Not needed</span></td></tr><tr><th scope="row">Fuel and tolls</th><td><span class="na">—</span></td><td><span class="na">—</span></td></tr><tr><th scope="row">Food and activities</th><td><span class="chip s-estimate">€600<small>estimate</small></span></td><td><span class="chip s-estimate">€700<small>estimate</small></span></td></tr><tr class="tot"><th scope="row">Total per family</th><td><strong>€5,716</strong><span class="diff over">€1,716 over</span><div class="bar" role="img" aria-label="Confirmed €5,116, estimated €600"><span class="c" style="width:53.85%"></span><span class="e" style="width:6.32%"></span><i class="mark" style="left:42.11%"></i></div></td><td><strong>€6,508</strong><span class="diff over">€2,508 over</span><div class="bar" role="img" aria-label="Confirmed €5,808, estimated €700"><span class="c" style="width:61.14%"></span><span class="e" style="width:7.37%"></span><i class="mark" style="left:42.11%"></i></div></td></tr></tbody></table><p class="how">Quote on screen: €4,728 for 2 to 14 Aug 2027 with half board, 1 room, 4 guests. Flights to Palma use the fares from your screenshots. Re-run the quote with each family’s exact children’s ages, because the Berlin family’s price may differ.</p></div><footer class="cfoot"><span>All three families together</span><strong>€17,940</strong></footer></article>
+<article class="card"><header class="chead"><h3>Cádiz: Barceló Costa Ballena Golf &amp; Spa</h3><p class="meta"><span>12 nights</span><span>Spain, Madrid families drive, Berlin family rents a car</span></p></header><div class="cbody"><p class="desc">Superior Family room, half board, 2 adults and 2 children, 2 to 14 August.</p><table class="costs"><thead><tr><th scope="col"><span class="sr">Item</span></th><th scope="col">Madrid family<small>each of the two</small></th><th scope="col">Berlin family</th></tr></thead><tbody><tr><th scope="row">Accommodation</th><td><span class="chip s-confirmed">€6,224<small>confirmed</small></span></td><td><span class="chip s-confirmed">€6,224<small>confirmed</small></span></td></tr><tr><th scope="row">Flights (4 seats)</th><td><span class="na">Drive</span></td><td><span class="chip s-confirmed">€868<small>confirmed</small></span></td></tr><tr><th scope="row">Car rental</th><td><span class="na">Not needed</span></td><td><span class="chip s-estimate">€700<small>estimate</small></span></td></tr><tr><th scope="row">Fuel and tolls</th><td><span class="chip s-estimate">€275<small>estimate</small></span></td><td><span class="chip s-estimate">€275<small>estimate</small></span></td></tr><tr><th scope="row">Food and activities</th><td><span class="chip s-estimate">€800<small>estimate</small></span></td><td><span class="chip s-estimate">€800<small>estimate</small></span></td></tr><tr class="tot"><th scope="row">Total per family</th><td><strong>€7,299</strong><span class="diff over">€3,299 over</span><div class="bar" role="img" aria-label="Confirmed €6,224, estimated €1,075"><span class="c" style="width:65.52%"></span><span class="e" style="width:11.32%"></span><i class="mark" style="left:42.11%"></i></div></td><td><strong>€8,867</strong><span class="diff over">€4,867 over</span><div class="bar" role="img" aria-label="Confirmed €7,092, estimated €1,775"><span class="c" style="width:74.65%"></span><span class="e" style="width:18.68%"></span><i class="mark" style="left:42.11%"></i></div></td></tr></tbody></table><p class="how">Quote on screen: €6,224 non-refundable. Other rates for the same stay: €6,535 (secure rate) and €7,002 (free cancellation). The Berlin family flies to Madrid, rents a car there for about 13 days (my estimate) and drives with the Madrid families.</p></div><footer class="cfoot"><span>All three families together</span><strong>€23,465</strong></footer></article>
+  </div>
+
+  <section class="ref" aria-label="Flight prices">
+    <h2><span class="r">Reference:</span> flight prices</h2>
+    <p class="refsub">Per person, round trip, 2 to 14 August</p>
+    <div class="fgrid">
+      <div><strong>Madrid to Berlin: €194</strong><span>Iberia direct. Cheapest shown: €174.</span></div>
+      <div><strong>Berlin to Madrid: €217</strong><span>Iberia direct. Cheapest shown: €201.</span></div>
+      <div><strong>Madrid to Mallorca: €97</strong><span>Iberia Express direct. Next: €101 and €125.</span></div>
+      <div><strong>Berlin to Mallorca: €270</strong><span>easyJet direct. Ryanair €298, Eurowings €299. Cheapest shown: €188.</span></div>
+    </div>
+    <p class="fnote">Source: your Google Flights screenshots, 1 adult, economy, taxes included. Each family is priced with 4 paid seats: Madrid to Berlin €776, Berlin to Madrid €868, Madrid to Mallorca €388, Berlin to Mallorca €1,080. The Berlin to Mallorca results show a crossed-out bag icon, which usually means no cabin bag is included, so check baggage fees. For Salou and Cádiz, the Berlin family flies to Madrid, rents a car there and drives with the Madrid families. The 7-night options use the 2 to 14 August fares, so check them for the real dates.</p>
+  </section>
+
+  <section class="notes">
+    <div>
+      <h2><span class="r">What counts</span> as confirmed</h2>
+      <ul>
+        <li>Confirmed: the Iberostar (Mallorca), Barceló (Cádiz) and Blue Mountain Resort (Poland) quotes, and all the flight fares, taken from your screenshots. The Blue Mountain price excludes taxes and fees.</li>
+        <li>Pro-rated: the Mondschein apartment and the 2-bedroom house. The quotes were for longer stays, so I divided them to 13 nights.</li>
+        <li>Everything else is my estimate. The rental car for the Germany, Poland and Spain road-trip options is still to check.</li>
+      </ul>
+    </div>
+    <div>
+      <h2><span class="r">Reading</span> the cards</h2>
+      <ul>
+        <li>Options are ordered from the lowest to the highest cost for all three families together.</li>
+        <li>Berlin family in the Germany options: they stay at home, so accommodation is zero and costs are only fuel, food and activities.</li>
+        <li>Costs grow with the number of nights, so 7-night and 13-night options are not like for like.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+</body>
+</html>
